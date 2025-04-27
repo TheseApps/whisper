@@ -7,15 +7,28 @@
 
 Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multitasking model that can perform multilingual speech recognition, speech translation, and language identification.
 
-
 ## Approach
 
 ![Approach](https://raw.githubusercontent.com/openai/whisper/main/approach.png)
 
 A Transformer sequence-to-sequence model is trained on various speech processing tasks, including multilingual speech recognition, speech translation, spoken language identification, and voice activity detection. These tasks are jointly represented as a sequence of tokens to be predicted by the decoder, allowing a single model to replace many stages of a traditional speech-processing pipeline. The multitask training format uses a set of special tokens that serve as task specifiers or classification targets.
 
-
 ## Setup
+
+Let's create a virtual environment and install the required dependencies:
+    python -m venv venv
+
+Let's activate the virtual environment and install the required dependencies:
+    .\venv\Scripts\activate
+    pip install -e .
+
+Now let's check if ffmpeg is installed, which is a required dependency for Whisper:
+    ffmpeg -version
+
+Let's make sure all dependencies are installed correctly by running a simple test:
+    python -c "import whisper; print('Whisper successfully imported!')"
+
+
 
 We used Python 3.9.9 and [PyTorch](https://pytorch.org/) 1.10.1 to train and test our models, but the codebase is expected to be compatible with Python 3.8-3.11 and recent PyTorch versions. The codebase also depends on a few Python packages, most notably [OpenAI's tiktoken](https://github.com/openai/tiktoken) for their fast tokenizer implementation. You can download and install (or update to) the latest release of Whisper with the following command:
 
@@ -30,6 +43,8 @@ To update the package to the latest version of this repository, please run:
     pip install --upgrade --no-deps --force-reinstall git+https://github.com/openai/whisper.git
 
 It also requires the command-line tool [`ffmpeg`](https://ffmpeg.org/) to be installed on your system, which is available from most package managers:
+
+
 
 ```bash
 # on Ubuntu or Debian
@@ -54,7 +69,6 @@ You may need [`rust`](http://rust-lang.org) installed as well, in case [tiktoken
 pip install setuptools-rust
 ```
 
-
 ## Available models and languages
 
 There are six model sizes, four with English-only versions, offering speed and accuracy tradeoffs.
@@ -78,7 +92,6 @@ Whisper's performance varies widely depending on the language. The figure below 
 ![WER breakdown by language](https://github.com/openai/whisper/assets/266841/f4619d66-1058-4005-8f67-a9d811b77c62)
 
 
-
 ## Command-line usage
 
 The following command will transcribe speech in audio files, using the `turbo` model:
@@ -98,7 +111,6 @@ Run the following to view all available options:
     whisper --help
 
 See [tokenizer.py](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py) for the list of all available languages.
-
 
 ## Python usage
 
@@ -143,7 +155,6 @@ print(result.text)
 ## More examples
 
 Please use the [🙌 Show and tell](https://github.com/openai/whisper/discussions/categories/show-and-tell) category in Discussions for sharing more example usages of Whisper and third-party extensions such as web demos, integrations with other tools, ports for different platforms, etc.
-
 
 ## License
 
